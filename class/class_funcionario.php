@@ -9,6 +9,7 @@ class Funcionario extends Conexao{
     private $nome;
     private $cargo;
     private $departamento;
+    private $res;
     
     
 
@@ -79,12 +80,16 @@ class Funcionario extends Conexao{
     }
 
     //Read
-    public function readFunc($id){
-
+    public function readFunc(){
+        $query = 'SELECT * FROM funcionario';
+        $stmt = $this->connectDB()->prepare($query);
+        $stmt->execute();
+        $this->res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->res;
     }
 }
 
-switch ($_POST['op']) {
+switch (isset($_POST['op'])) {
     case 'cad':
         $teste = new Funcionario();
         $teste->setNome($_POST['nome']);

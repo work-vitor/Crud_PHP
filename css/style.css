@@ -1,20 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+/*************Fontes***********************/
+@import url('https://fonts.googleapis.com/css?family=Sniglet');
+
+@import url('https://fonts.googleapis.com/css?family=Kalam');
+
+
+
+
 body{
 	text-align: center;
-	
 	font-family: 'M PLUS 1', sans-serif;
+	display: flex;
+	justify-content: center;
 }
 
 .cad{ 
-	padding: 15px;
+	padding: auto;
+	margin-top: 10%;
 	border: 2px solid;
 	color: black;
-	margin-right: auto;
-	margin-left: auto;
-	height: 400px;
-	width: 400px;
+	height: auto;
+	width: auto;
 	border-radius: 10px;
+	display: flex;
+	
+	
 }
 
 .cad h4{
@@ -95,3 +106,46 @@ li a {
 		border-radius: 10px;
 		
 	}
+
+#content{
+	float: left;
+	width: auto;
+	padding: auto;
+	color: black;
+	display: flex;
+	justify-content: center;
+	/*font-family: 'Sniglet', cursive;*/
+}
+	
+.tabelaCrud{
+	justify-content: center;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	
+	
+	
+	/*font-family: 'Kalam', cursive;*/
+}
+
+.tabelaCrud tr:nth-child(1n){
+	background: silver;
+}
+
+.tabelaCrud tr:nth-child(1n):hover{
+	background: #CCC;
+	color: #000; 
+	border-color: #000;
+}
+	
+.tabelaCrud tr:first-child{
+	background: black;
+	color: #fff;
+	font-variant: bold;
+	font-size: 25px;
+}
+	
+.tabelaCrud tr{
+	width: 100%;
+	
+}
