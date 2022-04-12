@@ -13,7 +13,7 @@
 
 		<form class="form" method="POST" action="../class/class_funcionario.php">
 
-            <input type="hidden" name="op" value="cad">
+            <input type="hidden" name="op" value="op">
 			
 			<h1>Cadastrar Funcionário</h1>
 
@@ -28,7 +28,8 @@
 
 		<br>
 
-        <button>Enviar</button>
+        <button type="submit">Enviar</button>
+        <button type="reset">Limpar</button>
 
 	</form>
 
