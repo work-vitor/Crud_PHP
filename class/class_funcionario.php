@@ -92,11 +92,15 @@ class Funcionario extends Conexao
     }
 
     //Read
-    public function readFunc()
+    public function readFunc($id)
     {
 
         try {
-            $query = 'SELECT * FROM funcionario';
+            if ($id >= 1) {
+                $query = 'SELECT * FROM funcionario where id = ' . $id . ';';
+            } else {
+                $query = 'SELECT * FROM funcionario;';
+            }
             $stmt = $this->connectDB()->prepare($query);
             $stmt->execute();
             $this->res = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -107,9 +111,10 @@ class Funcionario extends Conexao
     }
 
     //Delete
-    public function deleteFunc($id){
+    public function deleteFunc($id)
+    {
 
-        try{
+        try {
 
             $query = 'DELETE FROM funcionario WHERE id = :id;';
             $stmt = $this->connectDB()->prepare($query);
@@ -118,33 +123,61 @@ class Funcionario extends Conexao
             echo "<script> alert('Deletado com sucesso');</script>";
             echo "<script> window.location.replace('../views/list_funcionarios.php');</script>";
             exit;
-        } catch (PDOException $e){
-            echo "Erro SQL: ".$e->getMessage();
+        } catch (PDOException $e) {
+            echo "Erro SQL: " . $e->getMessage();
         }
+    }
+
+    //Update
+    public function updateFunc($id, $nome, $cargo, $dep)
+    {
 
 
+        try {
+            $query = 'UPDATE funcionario set nome = :nome, cargo  = :cargo, departamento = :departamento WHERE  id = :id;';
+
+            $stmt = $this->connectDB()->prepare($query);
+
+            $stmt->bindValue(':id', $id);
+            $stmt->bindValue(':nome', $nome);
+            $stmt->bindValue(':cargo', $cargo);
+            $stmt->bindValue(':departamento', $dep);
+
+            $stmt->execute();
+
+            echo "<script> alert('Atualizado com sucesso');</script>";
+            echo "<script> window.location.replace('../views/list_funcionarios.php');</script>";
+            exit;
+        } catch (PDOException $e) {
+            echo "Erro SQL: " . $e->getMessage();
+        }
     }
 }
 
 $teste = new Funcionario();
 
+//Delete
 if (isset($_GET['id'])) {
+
     $teste->setId($_GET['id']);
     $teste->deleteFunc($teste->getId());
 }
+//Cadastro 
+elseif (isset($_POST['cad'])) {
 
-switch (isset($_POST['op'])) {
-    case 'cad':
-        
-        $teste->setNome($_POST['nome']);
-        $teste->setCargo($_POST['cargo']);
-        $teste->setDepartamento($_POST['depart']);
-        $teste->createFunc($teste->getNome(), $teste->getCargo(), $teste->getDepartamento());
-        break;
+    $teste->setNome($_POST['nome']);
+    $teste->setCargo($_POST['cargo']);
+    $teste->setDepartamento($_POST['depart']);
+    $teste->createFunc($teste->getNome(), $teste->getCargo(), $teste->getDepartamento());
+}
+//Update
+elseif (isset($_POST['up'])) {
 
-    default:
-        # code...
-        break;
+    $teste->setId($_POST['id']);
+    $teste->setNome($_POST['nome']);
+    $teste->setCargo($_POST['cargo']);
+    $teste->setDepartamento($_POST['depart']);
+    $teste->updateFunc($teste->getId(),$teste->getNome(), $teste->getCargo(), $teste->getDepartamento());
 }
 
 /**/

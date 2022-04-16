@@ -1,12 +1,6 @@
 <?php
 include '../class/class_funcionario.php';
 
-
-if(isset($_GET['id'])){
-
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +15,10 @@ if(isset($_GET['id'])){
 </head>
 
 <body>
+
+
     <div class="cad">
+
         <div id="content">
             <table class="tabelaCrud">
                 <tr>
@@ -32,8 +29,9 @@ if(isset($_GET['id'])){
                 </tr>
 
                 <?php
+                $id = 0;
                 $crud = new Funcionario();
-                $BFetch = $crud->readFunc();
+                $BFetch = $crud->readFunc($id);
 
                 foreach ($BFetch as $dados) {
 
@@ -45,7 +43,7 @@ if(isset($_GET['id'])){
                         <td><?php echo $dados['departamento'] ?></td>
 
                         <td>
-                            <a href="<?php echo "list_funcionario.php?id={$dados['id']}"; ?>"><img src="https://img.icons8.com/material/24/000000/edit.png"></a>
+                            <a href="<?php echo "Update_funcionarios.php?up={$dados['id']}"; ?>"><img src="https://img.icons8.com/material/24/000000/edit.png"></a>
                             <a class="Deletar" href="<?php echo "../class/class_funcionario.php?id={$dados['id']}"; ?>"><img src="https://img.icons8.com/material/24/000000/delete.png"></a>
                         </td>
                     </tr>
@@ -55,8 +53,14 @@ if(isset($_GET['id'])){
                 ?>
 
             </table>
+
         </div>
+
+
+
     </div>
+
+    
 </body>
 
 </html>
